@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +23,7 @@ public class ClientDb extends UuidAndVersionResource {
   @Column(nullable = false)
   private String identifier;
 
-  @ManyToOne(targetEntity = AccountDb.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(targetEntity = AccountDb.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
   @JoinColumn(name = "client_id", nullable = false)
   private Set<AccountDb> accounts;
 }

@@ -17,5 +17,7 @@ public class Account {
 
   private Long version;
 
+  private String accountNumber;
+
   private BigDecimal amount;
 }

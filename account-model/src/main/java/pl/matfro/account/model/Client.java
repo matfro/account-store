@@ -16,5 +16,5 @@ public class Client {
 
   private String identifier;
 
-  private Set<Account> accouns;
+  private Set<Account> accounts;
 }

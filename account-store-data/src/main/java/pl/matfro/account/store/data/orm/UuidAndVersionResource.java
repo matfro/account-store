@@ -4,6 +4,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import pl.matfro.common.components.resources.IdAndVersion;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id", "version"})
+@MappedSuperclass
 public abstract class UuidAndVersionResource implements IdAndVersion<UUID> {
 
   @GeneratedValue(generator = "uuid")

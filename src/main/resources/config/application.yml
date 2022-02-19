@@ -1,0 +1,26 @@
+spring:
+  liquibase:
+    enabled: ${ENABLE_RUN_LIQUIBASE_IN_STARTUP:true}
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:h2:mem:testdb}
+    username: ${DATASOURCE_USERNAME:sa}
+    password: ${DATASOURCE_PASSWORD:password}
+    driver-class-name: ${DATASOURCE_DRIVER:org.h2.Driver}
+    hikari:
+      idle-timeout: ${DATASOURCE_POOL_IDLE_TIMEOUT:120000}
+      maximum-pool-size: ${DATASOURCE_POOL_MAX_POOL_SIZE:5}
+      minimum-idle: ${DATASOURCE_POOL_MIN_IDLE:3}
+  jpa:
+    defer-datasource-initialization: ${DEFER_DATASOURCE_INIT:true}
+    database-platform: ${DATASOURCE_DIALECT:org.hibernate.dialect.H2Dialect}
+
+management:
+  endpoint:
+    health:
+      show-details: ${MANAGEMENT_HEALTH_SHOW_DETAILS:always}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:8082}
