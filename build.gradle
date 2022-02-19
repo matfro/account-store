@@ -53,11 +53,7 @@ dependencies {
   runtimeOnly 'com.h2database:h2'
   implementation (project(':account-store-data'))
   implementation (project(':account-store-exchange-rates-fetcher'))
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  testImplementation "org.spockframework:spock-core:$spockVersion"
-  testImplementation "org.spockframework:spock-spring:$spockVersion"
-  testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
-  testImplementation "com.github.tomakehurst:wiremock-jre8:$wiremockVersion"
+  testImplementation (project(':test-support'))
 }
 
 project(':common-mapping') {
@@ -85,3 +81,13 @@ project(':account-store-data') {
 }
 
 project(':account-model') {}
+
+project(':test-support') {
+  dependencies {
+    api 'org.springframework.boot:spring-boot-starter-test'
+    api "org.spockframework:spock-core:$spockVersion"
+    api "org.spockframework:spock-spring:$spockVersion"
+    api "org.codehaus.groovy:groovy-all:$groovyVersion"
+    api "com.github.tomakehurst:wiremock-jre8:$wiremockVersion"
+  }
+}
