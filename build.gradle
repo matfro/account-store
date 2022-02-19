@@ -28,6 +28,7 @@ allprojects {
 
   apply plugin: 'java'
   apply plugin: 'java-library'
+  apply plugin: 'groovy'
   apply plugin: 'org.unbroken-dome.test-sets'
 
   apply from: "${rootDir}/gradle/test.gradle"
@@ -50,7 +51,8 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation "org.springdoc:springdoc-openapi-ui:$springDocVersion"
   runtimeOnly 'com.h2database:h2'
-
+  implementation (project(':account-store-data'))
+  implementation (project(':account-store-exchange-rates-fetcher'))
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation "org.spockframework:spock-core:$spockVersion"
   testImplementation "org.spockframework:spock-spring:$spockVersion"
@@ -72,3 +74,14 @@ project(':common-components') {
     api "org.modelmapper.extensions:modelmapper-spring:$modelMapperVersion"
   }
 }
+
+project(':account-store-data') {
+  dependencies {
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    api 'org.springframework:spring-context'
+    api (project(':common-mapping'))
+    api (project(':account-model'))
+  }
+}
+
+project(':account-model') {}
