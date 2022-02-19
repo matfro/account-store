@@ -1,0 +1,58 @@
+buildscript {
+  ext {
+    groovyVersion = '3.0.9'
+    spockVersion = '2.0-groovy-3.0'
+    wiremockVersion = '2.32.0'
+    springDocVersion = '1.6.6'
+  }
+}
+plugins {
+  id 'org.springframework.boot' version '2.6.3'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'groovy'
+  id 'idea'
+  id 'org.unbroken-dome.test-sets' version '4.0.0'
+  id "io.freefair.lombok" version "6.4.0"
+}
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+  mavenCentral()
+}
+
+allprojects {
+  group projectGroup
+
+  apply plugin: 'java'
+  apply plugin: 'java-library'
+  apply plugin: 'org.unbroken-dome.test-sets'
+
+  apply from: "${rootDir}/gradle/test.gradle"
+
+  dependencies {
+    annotationProcessor(group: 'org.projectlombok', name: 'lombok')
+    compileOnly(group: 'org.projectlombok', name: 'lombok')
+  }
+}
+
+subprojects {
+  apply plugin: 'io.freefair.lombok'
+  apply plugin: 'io.spring.dependency-management'
+  apply plugin: 'org.springframework.boot'
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation "org.springdoc:springdoc-openapi-ui:$springDocVersion"
+  runtimeOnly 'com.h2database:h2'
+
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation "org.spockframework:spock-core:$spockVersion"
+  testImplementation "org.spockframework:spock-spring:$spockVersion"
+  testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+  testImplementation "com.github.tomakehurst:wiremock-jre8:$wiremockVersion"
+}

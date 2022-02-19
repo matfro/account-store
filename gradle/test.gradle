@@ -1,0 +1,37 @@
+testSets {
+	integrationTest { dirName = 'integration-test' }
+	functionalTest { dirName = 'functional-test' }
+}
+
+test {
+  testLogging {
+    showStandardStreams = true
+  }
+}
+
+integrationTest {
+  mustRunAfter test
+  testLogging {
+    showStandardStreams = true
+  }
+  maxHeapSize = '1G'
+}
+
+functionalTest {
+  mustRunAfter integrationTest
+  testLogging {
+    showStandardStreams = true
+  }
+}
+
+check.dependsOn test
+check.dependsOn integrationTest
+check.dependsOn functionalTest
+
+tasks.withType(Test) {
+  useJUnitPlatform()
+
+  systemProperty 'spock.logEnabled', 'true'
+  systemProperty 'spock.logFileDir', './build/test-results/test'
+  systemProperty 'spock.logFileName', 'spock-report'
+}
