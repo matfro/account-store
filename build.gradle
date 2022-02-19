@@ -91,3 +91,12 @@ project(':test-support') {
     api "com.github.tomakehurst:wiremock-jre8:$wiremockVersion"
   }
 }
+
+project(':account-store-exchange-rates-fetcher') {
+  dependencies {
+    api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-actuator'
+    api 'org.springframework.boot:spring-boot-starter-cache'
+    testImplementation (project(':test-support'))
+  }
+}

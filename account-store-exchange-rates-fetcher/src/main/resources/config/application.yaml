@@ -1,0 +1,18 @@
+management:
+  endpoint:
+    health:
+      group.deepAliveCheck:
+        include: exchangeRateRegistry
+        show-details: ALWAYS
+
+pl.matfro.account.store:
+  exchange.rates:
+    fetcher:
+      base-url: ${EXCHANGE_RATE_REGISTRY_BASE_URL:http://api.nbp.pl}
+      endpoint: ${EXCHANGE_RATE_REGISTRY_ENDPOINT:/api/exchangerates/rates}
+      cache:
+        eviction-cron: ${EXCHANGE_RATE_CACHE_EVICTION_CRON:0 15 12 * * MON-FRI}
+      currency:
+        default-currency: EUR
+        currency-table-map:
+          EUR: A
