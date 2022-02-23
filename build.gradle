@@ -19,8 +19,9 @@ plugins {
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-repositories {
-  mavenCentral()
+wrapper {
+  distributionType = Wrapper.DistributionType.ALL
+  distributionUrl = 'https://services.gradle.org/distributions/gradle-7.4-bin.zip'
 }
 
 allprojects {
@@ -32,6 +33,10 @@ allprojects {
   apply plugin: 'org.unbroken-dome.test-sets'
 
   apply from: "${rootDir}/gradle/test.gradle"
+
+  repositories {
+    mavenCentral()
+  }
 
   dependencies {
     annotationProcessor(group: 'org.projectlombok', name: 'lombok')
