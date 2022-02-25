@@ -1,5 +1,6 @@
 buildscript {
   ext {
+    springBootVersion = '2.6.3'
     groovyVersion = '3.0.9'
     spockVersion = '2.0-groovy-3.0'
     modelMapperVersion = "3.0.0"
@@ -8,7 +9,7 @@ buildscript {
   }
 }
 plugins {
-  id 'org.springframework.boot' version '2.6.3'
+  id 'org.springframework.boot' version "$springBootVersion"
   id 'io.spring.dependency-management' version '1.0.11.RELEASE'
   id 'groovy'
   id 'idea'
@@ -47,7 +48,12 @@ allprojects {
 subprojects {
   apply plugin: 'io.freefair.lombok'
   apply plugin: 'io.spring.dependency-management'
-  apply plugin: 'org.springframework.boot'
+
+  dependencyManagement {
+    imports {
+      mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+    }
+  }
 }
 
 dependencies {
